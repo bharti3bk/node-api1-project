@@ -1,14 +1,23 @@
 // implement your API here 
-const express = require('express')
+//  
+require('dotenv').config(); 
+const port = process.env.PORT; 
+console.log(port)
+
+const express = require('express') 
 const db = require('./data/db.js')
 const bodyParser = require('body-parser')
-
-
 const server = express();
-server.use(bodyParser.json());
+server.use(bodyParser.json()); 
+
 server.get('/', (req, res) => {
     res.send('Hello from Express .....');
-})
+})  
+
+
+server.listen(port, () => {
+    console.log(`server is listening on port ${port}`);
+}) 
 
 server.get('/api/users', (req, res) => {
     const users = db.find()
@@ -52,6 +61,4 @@ server.delete("/api/users/:id", (req, res) => {
         })
 })
 
-server.listen(8000, () => {
-    console.log(`server is listening on port 8000`);
-}) 
+
